@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Turbo Race</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="vig"></div>
+<div id="credit">Vinicius Wichert 2 desenvolvimento de sistemas</div>
+<div id="hud">
+  <div class="pn" id="hl"></div>
+  <div class="pn" id="ht"></div>
+  <div class="pn" id="hp"></div>
+  <div class="pn" id="hs"></div>
+  <div class="pn" id="hb"><div id="tbw"><i id="tbf"></i></div><small>TURBO [SHIFT]</small></div><div class="pn" id="hi"></div><button id="pb" aria-label="Pausar">❚❚</button>
+</div>
+<div id="cd"></div>
+<div id="touch">
+  <div class="g"><button class="tb" data-k="l">◀</button><button class="tb" data-k="r">▶</button></div>
+  <div class="g"><button class="tb" data-k="t">⚡</button><button class="tb" data-k="s">↯</button><button class="tb" data-k="d">▼</button><button class="tb big" data-k="u">▲</button></div>
+</div>
+
+<div class="scr on" id="menu">
+  <div id="brand">
+    <div id="gtitle">
+      <h1>TURBO <i>RACE</i></h1>
+    </div>
+    <img id="schoollogo" src="assets/logo-colegio.png" alt="Logotipo do Colégio Estadual Barbosa Ferraz" onerror="this.classList.add('hide')">
+  </div>
+  <div class="sub" id="bm"></div>
+  <button class="btn" id="bplay">Jogar</button>
+  <button class="btn sec" id="bmode"></button>
+  <button class="btn sec" id="bdiff"></button>
+  <button class="btn sec" id="bcar"></button>
+  <button class="btn sec" id="btrk"></button>
+  <button class="btn sec" id="btm">Melhores tempos</button>
+  <button class="btn sec" id="bhow">Como jogar</button>
+</div>
+
+<div class="scr" id="sel"><h2 id="selt"></h2><div class="cards" id="cards"></div><button class="btn sec" id="selb">Voltar</button></div>
+<div class="scr" id="times"><h2>MELHORES TEMPOS</h2><div class="res" id="tl"></div><button class="btn sec" id="tback">Voltar</button></div>
+
+<div class="scr" id="how">
+  <h2>COMO JOGAR</h2>
+  <div class="box">
+    <b>W / ↑</b>Acelerar<br>
+    <b>S / ↓</b>Frear e dar ré<br>
+    <b>A / ←</b>Virar à esquerda<br>
+    <b>D / →</b>Virar à direita<br>
+    <b>ESPAÇO</b>Drift (com A/D)<br>
+    <b>SHIFT</b>Turbo<br>
+    <b>ESC</b>Pausar<br>
+    <b>Celular</b>Botões na tela<br>
+    <span style="color:var(--mut)">Complete 3 voltas. Drifts longos dão bônus de velocidade e carregam o turbo. Itens: T turbo, E escudo, B boost, L deixa os rivais lentos. Cuidado com óleo, pneus e barreiras.</span><br>
+    <span style="color:var(--mut)">DIFICULDADE: Fácil (rivais erram mais) · Médio (equilibrado) · Difícil (frenagem e trajetórias melhores) · Extremo (poucos erros, sem trapaça).</span><br>
+    <span style="color:var(--mut)">RIVAIS: ROSSO agressivo · VORTEX técnico · AURUM estrategista · TORO veloz/imprevisível · ROYALE velocista · COMET técnico · ECHO imprevisível. Cada um tem carro, cor e acerto próprios.</span>
+  </div>
+  <button class="btn sec" id="bback">Voltar</button>
+</div>
+
+<div class="scr" id="pause">
+  <h2>PAUSA</h2>
+  <button class="btn" id="bres">Continuar</button>
+  <button class="btn sec" id="brst">Reiniciar</button>
+  <button class="btn sec" id="bmenu1">Menu</button>
+</div>
+
+<div class="scr" id="result">
+  <h2>CORRIDA FINALIZADA</h2>
+  <div id="rec"></div>
+  <div class="res">
+    <span>TEMPO FINAL</span><em id="rt"></em>
+    <span>POSIÇÃO</span><em id="rp"></em>
+    <span>MELHOR TEMPO</span><em id="rb"></em>
+  </div>
+  <div class="res" id="rtab" style="display:none"></div>
+  <button class="btn" id="bagain">Jogar novamente</button>
+  <button class="btn sec" id="bmenu2">Menu</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

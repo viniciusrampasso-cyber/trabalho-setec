@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Turbo Race</title>
+<meta name="theme-color" content="#03060c">
+<title>Turbo Race · Colégio Barbosa Ferraz</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <canvas id="c"></canvas>
 <div id="vig"></div>
-<div id="credit">Vinicius Wichert 2 desenvolvimento de sistemas</div>
+<div id="credit" role="note">Feito por Vinicius Wichert 2 desenvolvimento de sistemas</div>
 <div id="hud">
   <div class="pn" id="hl"></div>
   <div class="pn" id="ht"></div>
@@ -19,46 +20,144 @@
 </div>
 <div id="cd"></div>
 <div id="touch">
-  <div class="g"><button class="tb" data-k="l">◀</button><button class="tb" data-k="r">▶</button></div>
-  <div class="g"><button class="tb" data-k="t">⚡</button><button class="tb" data-k="s">↯</button><button class="tb" data-k="d">▼</button><button class="tb big" data-k="u">▲</button></div>
+  <div class="g"><button class="tb" data-k="l" aria-label="Virar à esquerda">◀</button><button class="tb" data-k="r" aria-label="Virar à direita">▶</button></div>
+  <div class="g"><button class="tb" data-k="t" aria-label="Turbo">⚡</button><button class="tb" data-k="s" aria-label="Drift">↯</button><button class="tb" data-k="d" aria-label="Frear ou dar ré">▼</button><button class="tb big" data-k="u" aria-label="Acelerar">▲</button></div>
 </div>
 
 <div class="scr on" id="menu">
   <div id="brand">
     <div id="gtitle">
+      <div class="kick">ARCADE RACING EXPERIENCE</div>
       <h1>TURBO <i>RACE</i></h1>
+      <div class="brandline"><span>3 PISTAS</span><span>8 CARROS</span><span>7 RIVAIS</span></div>
     </div>
-    <img id="schoollogo" src="assets/logo-colegio.png" alt="Logotipo do Colégio Estadual Barbosa Ferraz" onerror="this.classList.add('hide')">
+    <div class="school">
+      <div class="schoolbadge">
+        <img id="schoollogo" src="assets/logo-colegio.png" alt="Logotipo do Colégio Estadual Barbosa Ferraz" onerror="this.parentNode.classList.add('hide')">
+      </div>
+      <span class="schoolcap">COLÉGIO BARBOSA FERRAZ</span>
+    </div>
   </div>
   <div class="sub" id="bm"></div>
-  <button class="btn" id="bplay">Jogar</button>
-  <button class="btn sec" id="bmode"></button>
-  <button class="btn sec" id="bdiff"></button>
-  <button class="btn sec" id="bcar"></button>
-  <button class="btn sec" id="btrk"></button>
-  <button class="btn sec" id="btm">Melhores tempos</button>
-  <button class="btn sec" id="bhow">Como jogar</button>
+  <div id="menuMain">
+    <button class="btn play" id="bplay"><small>INICIAR AGORA</small><b id="bplayn">CORRIDA RÁPIDA</b></button>
+    <button class="btn howbtn" id="bhow">
+      <span class="tag">COMECE AQUI</span>
+      <span class="tt">COMO JOGAR</span>
+      <span class="ts">Controles, menu, dicas e muito mais</span>
+    </button>
+  </div>
+  <div id="menuGrid">
+    <button class="btn sec opt" id="bmode"></button>
+    <button class="btn sec opt" id="bdiff"></button>
+    <button class="btn sec opt" id="bcar"></button>
+    <button class="btn sec opt" id="btrk"></button>
+    <button class="btn sec opt wide" id="btm"><small>RECORDES</small><b>MELHORES TEMPOS</b></button>
+  </div>
 </div>
 
-<div class="scr" id="sel"><h2 id="selt"></h2><div class="cards" id="cards"></div><button class="btn sec" id="selb">Voltar</button></div>
-<div class="scr" id="times"><h2>MELHORES TEMPOS</h2><div class="res" id="tl"></div><button class="btn sec" id="tback">Voltar</button></div>
+<div class="scr" id="sel">
+  <div class="selhead">
+    <div class="kick" id="selk">CONFIGURAÇÃO</div>
+    <h2 id="selt"></h2>
+    <div class="selhint">Escolha uma opção para aplicar na hora</div>
+  </div>
+  <div class="cards" id="cards"></div>
+  <button class="btn sec" id="selb">Voltar ao menu</button>
+</div>
+
+<div class="scr" id="times"><h2>MELHORES TEMPOS</h2><div class="res" id="tl"></div><button class="btn sec" id="tback">Voltar ao menu</button></div>
 
 <div class="scr" id="how">
-  <h2>COMO JOGAR</h2>
-  <div class="box">
-    <b>W / ↑</b>Acelerar<br>
-    <b>S / ↓</b>Frear e dar ré<br>
-    <b>A / ←</b>Virar à esquerda<br>
-    <b>D / →</b>Virar à direita<br>
-    <b>ESPAÇO</b>Drift (com A/D)<br>
-    <b>SHIFT</b>Turbo<br>
-    <b>ESC</b>Pausar<br>
-    <b>Celular</b>Botões na tela<br>
-    <span style="color:var(--mut)">Complete 3 voltas. Drifts longos dão bônus de velocidade e carregam o turbo. Itens: T turbo, E escudo, B boost, L deixa os rivais lentos. Cuidado com óleo, pneus e barreiras.</span><br>
-    <span style="color:var(--mut)">DIFICULDADE: Fácil (rivais erram mais) · Médio (equilibrado) · Difícil (frenagem e trajetórias melhores) · Extremo (poucos erros, sem trapaça).</span><br>
-    <span style="color:var(--mut)">RIVAIS: ROSSO agressivo · VORTEX técnico · AURUM estrategista · TORO veloz/imprevisível · ROYALE velocista · COMET técnico · ECHO imprevisível. Cada um tem carro, cor e acerto próprios.</span>
+  <button class="tutclose" id="tclose" aria-label="Fechar tutorial">✕</button>
+  <div class="tut">
+    <header class="tuthead">
+      <div class="kick">GUIA DO PILOTO</div>
+      <h2>COMO JOGAR</h2>
+      <div class="tdots" id="tdots" aria-hidden="true"></div>
+    </header>
+    <div class="tutbody" id="tbody">
+
+      <section class="tutpg on" data-p="0">
+        <h3><span class="ic">☰</span> CONHECENDO O MENU</h3>
+        <p class="tlead">O menu é o ponto de partida. Tudo o que você escolhe nele vale para a próxima corrida — e o cenário ao fundo já mostra a pista selecionada.</p>
+        <div class="tgrid">
+          <div class="titem"><b>JOGAR</b><span>Inicia o modo escolhido com o carro, a pista e a dificuldade atuais.</span></div>
+          <div class="titem"><b>MODO DE JOGO</b><span><em>Corrida rápida:</em> 3 voltas contra 7 rivais. <em>Campeonato:</em> 3 pistas com pontos de 10 a 1. <em>Contrarrelógio:</em> sozinho contra o cronômetro.</span></div>
+          <div class="titem"><b>DIFICULDADE</b><span>Fácil, Médio, Difícil e Extremo. Muda apenas o comportamento dos rivais: erros, precisão, frenagem e agressividade — nunca a física do seu carro.</span></div>
+          <div class="titem"><b>CARRO</b><span>Quatro acertos: Equilibrado, Rápido, Aceleração e Controle. Os cartões mostram velocidade, aceleração e controle; a lista de rivais mostra Vmax, aceleração e freio de cada um.</span></div>
+          <div class="titem"><b>PISTA</b><span>Circuito Urbano, Florestal ou Deserto. No campeonato a pista é automática, então o botão fica bloqueado.</span></div>
+          <div class="titem"><b>MELHORES TEMPOS</b><span>Seus recordes por pista, salvos no navegador. Se o armazenamento não estiver disponível, o jogo continua normalmente.</span></div>
+          <div class="titem"><b>COMO JOGAR</b><span>Este guia em 5 etapas: menu, controles, corrida, interface e dicas.</span></div>
+        </div>
+      </section>
+
+      <section class="tutpg" data-p="1">
+        <h3><span class="ic">⌨</span> CONTROLES</h3>
+        <p class="tlead">No teclado, use as teclas abaixo. No celular ou tablet, os botões aparecem na tela durante a corrida.</p>
+        <div class="tkeys">
+          <div class="tkey"><span class="kb"><kbd>W</kbd><kbd>↑</kbd></span><b>Acelerar</b></div>
+          <div class="tkey"><span class="kb"><kbd>S</kbd><kbd>↓</kbd></span><b>Frear e dar ré</b></div>
+          <div class="tkey"><span class="kb"><kbd>A</kbd><kbd>←</kbd></span><b>Virar à esquerda</b></div>
+          <div class="tkey"><span class="kb"><kbd>D</kbd><kbd>→</kbd></span><b>Virar à direita</b></div>
+          <div class="tkey"><span class="kb"><kbd>ESPAÇO</kbd></span><b>Derrapar (segure com A/D)</b></div>
+          <div class="tkey"><span class="kb"><kbd>SHIFT</kbd></span><b>Turbo</b></div>
+          <div class="tkey"><span class="kb"><kbd>ESC</kbd></span><b>Pausar / retomar</b></div>
+          <div class="tkey"><span class="kb"><kbd>TOQUE</kbd></span><b>Botões na tela</b></div>
+        </div>
+        <div class="tnote"><b>No celular:</b> ◀ ▶ viram, ▲ acelera, ▼ freia/dá ré, ⚡ usa turbo e ↯ faz drift. O botão ❚❚ pausa a corrida.</div>
+        <div class="tnote"><b>Turbo:</b> a barra enche com o tempo em velocidade e com derrapagens. O SHIFT só funciona acima de 40 km/h e consome a barra.</div>
+      </section>
+
+      <section class="tutpg" data-p="2">
+        <h3><span class="ic">⚑</span> COMO VENCER UMA CORRIDA</h3>
+        <div class="tgrid">
+          <div class="titem"><b>COMPLETE 3 VOLTAS</b><span>A posição é calculada pelo progresso na pista: quem está mais à frente na volta aparece na frente. Cruze a linha para fechar cada volta.</span></div>
+          <div class="titem"><b>CURVAS</b><span>Freie antes da curva e acelere na saída. Entrar rápido demais faz o carro sair da pista, perder velocidade e levantar poeira.</span></div>
+          <div class="titem"><b>DRIFT</b><span>Segure ESPAÇO e vire com A/D em alta velocidade. Um drift longo carrega o turbo e pode gerar um boost ao terminar; exagerar derruba a velocidade.</span></div>
+          <div class="titem"><b>TURBO</b><span>Use em retas e na saída de curvas. O turbo aumenta a velocidade máxima e a aceleração, mas gasta a barra; mid-curva ele pode tirar o carro da trajetória.</span></div>
+          <div class="titem"><b>OBSTÁCULOS</b><span>Óleo escuro tira aderência; pilhas de pneus e barreiras reduzem a velocidade. Itens no caminho: <em>T</em> turbo cheio, <em>E</em> escudo, <em>B</em> boost e <em>L</em> deixa os rivais lentos.</span></div>
+          <div class="titem"><b>RESULTADOS</b><span>Ao completar as 3 voltas você vê tempo final, posição e melhor tempo. Na tela de resultados também aparece a tabela do campeonato, quando for o caso.</span></div>
+        </div>
+        <div class="tnote"><b>Campeonato:</b> cada uma das 3 pistas distribui pontos (10, 8, 6, 5, 4, 3, 2, 1). A tabela é atualizada ao fim de cada prova; depois da terceira, o botão inicia um novo campeonato.</div>
+      </section>
+
+      <section class="tutpg" data-p="3">
+        <h3><span class="ic">◎</span> A INTERFACE DA CORRIDA</h3>
+        <div class="tgrid">
+          <div class="titem"><b>VOLTA</b><span>No canto superior esquerdo: volta atual de 3.</span></div>
+          <div class="titem"><b>TEMPO</b><span>Abaixo da volta: tempo total da corrida, em minutos, segundos e milésimos.</span></div>
+          <div class="titem"><b>POSIÇÃO</b><span>No canto superior direito: sua posição entre os carros. No contrarrelógio aparece “—” porque você corre sozinho.</span></div>
+          <div class="titem"><b>VELOCIDADE</b><span>No centro inferior: km/h arredondados.</span></div>
+          <div class="titem"><b>TURBO</b><span>A barra abaixo da velocidade mostra a carga. Fica azul brilhante quando o turbo está ativo.</span></div>
+          <div class="titem"><b>ITENS</b><span>Sob o tempo aparecem escudo, boost e óleo ativos, com a duração em segundos quando aplicável.</span></div>
+          <div class="titem"><b>MINIMAPA</b><span>No canto superior direito: traçado e posição de todos os carros. O seu aparece com um anel branco.</span></div>
+          <div class="titem"><b>PAUSA</b><span>O botão ❚❚ na tela ou ESC abre a pausa, com continuar, reiniciar e voltar ao menu.</span></div>
+        </div>
+        <div class="tnote">Antes da largada aparece a contagem <b>3 · 2 · 1 · GO!</b>. O cronômetro começa junto com o GO.</div>
+      </section>
+
+      <section class="tutpg" data-p="4">
+        <h3><span class="ic">✦</span> DICAS PARA INICIANTES</h3>
+        <div class="tgrid">
+          <div class="titem"><b>1. APRENDA O CARRO</b><span>Faça uma corrida rápida no Fácil e teste Aceleração e Controle antes de escolher seu favorito.</span></div>
+          <div class="titem"><b>2. FREIE CEDO</b><span>Olhe para a curva seguinte, não para o para-choque. Solte o acelerador e freie antes de virar; acelere só na saída.</span></div>
+          <div class="titem"><b>3. EVITE CONTATO</b><span>Rivais e barreiras tiram velocidade. Em disputa, escolha um lado e mantenha a linha em vez de bater de porta.</span></div>
+          <div class="titem"><b>4. TURBO NA HORA CERTA</b><span>Guarde o turbo para as retas. Em curva, ele aumenta o raio e pode jogar você para fora.</span></div>
+          <div class="titem"><b>5. USE O MAPA</b><span>O minimapa mostra as curvas seguintes e onde estão os rivais. Antecipe a trajetória.</span></div>
+          <div class="titem"><b>6. ESCOLHA PELA PISTA</b><span>Rápido brilha em retas longas; Aceleração sai forte das curvas; Controle é melhor em traçados travados; Equilibrado funciona em qualquer circuito.</span></div>
+        </div>
+        <div class="tnote"><b>Pronto para correr?</b> Volte ao menu, escolha carro e pista e toque em Jogar. Se quiser um desafio maior, suba a dificuldade para Difícil ou Extremo — os rivais erram menos, mas continuam sujeitos à mesma física.</div>
+      </section>
+
+    </div>
+    <footer class="tutfoot">
+      <button class="btn sec tbtn" id="tprev">Anterior</button>
+      <span class="tcount" id="tcount" aria-live="polite">1 / 5</span>
+      <button class="btn tbtn" id="tnext">Próximo</button>
+    </footer>
+    <button class="tback" id="tutback">Voltar ao menu</button>
   </div>
-  <button class="btn sec" id="bback">Voltar</button>
 </div>
 
 <div class="scr" id="pause">
